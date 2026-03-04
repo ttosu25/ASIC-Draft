@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-
+Consists of a switch panel, seven seg, array of not gates a clock and a reset.
 
 ## How to test
 
-
+Play with the peripherals
 
 ## External hardware
 
-
+None
