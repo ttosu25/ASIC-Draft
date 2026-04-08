@@ -16,20 +16,24 @@ module neuron_state_W #(parameter M, W) // M is the number of membranes and thus
 		begin
 		
 			if(rst)
+			
 				begin
 					//initialise membrane values
 					for(int i = 1; i <= M; i++) begin
 						//evenly spread membranes
 						membranes[i-1] <= MIN_VAL + ( (MAX_VAL - MIN_VAL) * i) /M;
 					end
+					
+					dout <= '0;
+						
 				end
 			
 			else begin
 		
-				if(we) //we = 1 is a reading operation
-					dout <= membranes[addr];
-				else// we = 0 is a writing operation
-					membranes[addr] <= din;	
+					if(we) //we = 1 is a reading operation
+						dout <= membranes[addr];
+					else// we = 0 is a writing operation
+						membranes[addr] <= din;	
 					
 			end
 		end

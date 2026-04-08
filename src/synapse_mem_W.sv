@@ -24,6 +24,7 @@ module synapse_mem_W #(parameter int N, W)
 						//evenly spread weights
 						weights[i-1] <= MIN_VAL + ( (MAX_VAL - MIN_VAL) * i) /N;
 					end
+					dout <= '0;
 				end
 				
 			else begin
