@@ -78,8 +78,6 @@ assign uio_oe  = '0;
 		if(rst) begin
 		//1 bit signals
 			event_out <= '0;
-			spike_out <= '0; 
-			spiking <= '0;
 			indicator <= 1'b1;
 			
 		//LIF COMPUTATION PARAMETERS
