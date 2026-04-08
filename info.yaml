@@ -2,7 +2,14 @@
 project:
   wokwi_id:     0       # Set this to the ID of your Wokwi project (the number from the project's URL)
   source_files:
-    -
+    - core.sv
+    - control_unit_W.sv
+    - lif_W.sv
+    - neuron_state_W.sv
+    - sipo.sv
+    - synapse_mem_W
+
+  top_module: "core.sv"
   
   title:        "Spiking Pattern Recognition Core"      # Project title
   author:       "Terdoo Osu"      # Your name
