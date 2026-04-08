@@ -11,23 +11,25 @@ module core #(parameter WORD_LENGTH, NEURON_COUNT) //in this design its importan
 	input wire rst_n; //active low reset
 );
 
-	//interfacing peripherals
-	
-	//clk is the same 
-	logic rst;
-	assign rst = !rst_n; // - mapping to reset
+// internal interface signals
+logic rst;
+logic [NEURON_COUNT-1:0] spike_pattern;
+logic spike_in;
+logic event_out;
+logic indicator;
 
-	logic [NEURON_COUNT - 1: 0] spike_pattern;
-	assign spike_pattern = ui_in[NEURON_COUNT - 1: 0]; // neuron count cannot exceed 8
+// input mapping
+assign rst           = !rst_n;
+assign spike_pattern = ui_in[NEURON_COUNT-1:0];
+assign spike_in      = ui_in[NEURON_COUNT];
 
-	logic spike_in;
-	assign spike_in = ui_in[NEURON_COUNT]; // spike in is the switch after the MSB of spike pattern
+// output mapping
+assign ui_out[0]   = event_out;
+assign ui_out[1]   = indicator;
+assign ui_out[7:2] = '0;
 
-	logic event_out;
-	assign event_out = ui_out[0];
-
-	logic indicator; // indicates when input from user is being sampled 
-	assign indicator  = ui_out[1];
+assign uio_out = '0;
+assign uio_oe  = '0;
 	
 	//control signals
 	logic n_we;
@@ -35,17 +37,17 @@ module core #(parameter WORD_LENGTH, NEURON_COUNT) //in this design its importan
 	logic enable;
 	
 	//address bus
-	logic [$clog2(NEURON_COUNT)-1:0] addr;
+	logic signed [$clog2(NEURON_COUNT)-1:0] addr;
 	
 	//synapses buses
-	logic [WORD_LENGTH - 1:0] weights;
+	logic signed [WORD_LENGTH - 1:0] weights;
 	
 	//neuron buses
-	logic [WORD_LENGTH - 1: 0] mem_read;
-	logic [WORD_LENGTH - 1: 0] mem_write;
+	logic signed [WORD_LENGTH - 1: 0] mem_read;
+	logic signed [WORD_LENGTH - 1: 0] mem_write;
 	
 	// V_syn
-	logic [WORD_LENGTH - 1: 0] V_syn;
+	logic signed [WORD_LENGTH - 1: 0] V_syn;
 	
 	//lif buses
 	logic spiking; // spike event
@@ -78,6 +80,7 @@ module core #(parameter WORD_LENGTH, NEURON_COUNT) //in this design its importan
 			event_out <= '0;
 			spike_out <= '0; 
 			spiking <= '0;
+			indicator <= 1'b1;
 			
 		//LIF COMPUTATION PARAMETERS
 			threshold <= THRESH;
@@ -86,7 +89,10 @@ module core #(parameter WORD_LENGTH, NEURON_COUNT) //in this design its importan
 			
 		end
 		
-		else event_out <= (spike_out == spike_pattern);
+		else begin
+			event_out <= (spike_out == spike_pattern);
+			indicator <= ~indicator;
+		end
 		
 	
 	end
