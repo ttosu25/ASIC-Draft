@@ -1,6 +1,16 @@
 module core #(parameter WORD_LENGTH, NEURON_COUNT) //in this design its important to remember spike_in is the MSB of a NEURON_COUNT-bit Register
-(output logic event_out, input logic spike_in, input logic [NEURON_COUNT - 1: 0] spike_pattern ,input logic clk, rst);
-
+(
+	//board peripherals
+	input wire [7:0] ui_in; // Dedicated inputs, connected to the input switches
+	output wire [7:0] ui_out; // Dedicated outputs, connected to indicated LED and {actuator}
+	input wire [7:0] uio_in; // IOs - bidirectional input path
+	output wire [7:0] uio_out; // IOS - bidirectional output path
+	output wire [7:0] uio_oe; // IOS - bidirectional enable path
+	input wire ena; // Will go high when the design is enabled
+	input wire clk; // clock
+	input wire rst_n; //active low reset
+);
+	
 	//control signals
 	logic n_we;
 	logic s_we;
