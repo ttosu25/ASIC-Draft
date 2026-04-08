@@ -10,6 +10,24 @@ module core #(parameter WORD_LENGTH, NEURON_COUNT) //in this design its importan
 	input wire clk; // clock
 	input wire rst_n; //active low reset
 );
+
+	//interfacing peripherals
+	
+	//clk is the same 
+	logic rst;
+	assign rst = !rst_n; // - mapping to reset
+
+	logic [NEURON_COUNT - 1: 0] spike_pattern;
+	assign spike_pattern = ui_in[NEURON_COUNT - 1: 0]; // neuron count cannot exceed 8
+
+	logic spike_in;
+	assign spike_in = ui_in[NEURON_COUNT]; // spike in is the switch after the MSB of spike pattern
+
+	logic event_out;
+	assign event_out = ui_out[0];
+
+	logic indicator; // indicates when input from user is being sampled 
+	assign indicator  = ui_out[1];
 	
 	//control signals
 	logic n_we;
