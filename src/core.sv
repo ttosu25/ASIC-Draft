@@ -2,7 +2,7 @@ module core #(parameter WORD_LENGTH, NEURON_COUNT) //in this design its importan
 (
 	//board peripherals
 	input wire [7:0] ui_in; // Dedicated inputs, connected to the input switches
-	output wire [7:0] ui_out; // Dedicated outputs, connected to indicated LED and {actuator}
+	output wire [7:0] ui_out; // Dedicated outputs, connected to indicator LED and {actuator}
 	input wire [7:0] uio_in; // IOs - bidirectional input path
 	output wire [7:0] uio_out; // IOS - bidirectional output path
 	output wire [7:0] uio_oe; // IOS - bidirectional enable path
