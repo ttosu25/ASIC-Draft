@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## Spiking Pattern Detector
 
-![Architecture of LIF neuromorphic core](Spiking_Core_Schema.png)
+![Architecture of LIF neuromorphic core](docs/Spiking_Core_Schema.png)
 
 Spiking Pattern Detector is an application of a neuromorphic processing core, implementing a 4-neuron Spiking architecture with fixed-point precision (Q8.8). The system generates an event when the temporal spike response of an input signal matches a user-defined pattern.
 
