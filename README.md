@@ -25,7 +25,7 @@ This architecture serves as a foundation for exploring event-driven computation 
 
 | Name     | Bit Width | Access | Description                                                                       |
 |--------------|-----------|--------|-----------------------------------------------------------------------------------|
-| Synapse_mem  | 64        | R      | Stores the values of 4 synaptic weights                                           |
+| synapse_mem  | 64        | R      | Stores the values of 4 synaptic weights                                           |
 | neuron_state | 64        | R/W    | Stores values of membrane potentials for 4 neurons                                |
 | Spike_out    | 4         | W      | Stores a vector where the nth bit indicates whether the nth neuron spiked or not. |
 
